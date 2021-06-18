@@ -21,15 +21,21 @@
           <%= link_to 'About Creator ',home_about_path, class:"nav-link fw-light active"  %>
         </li>
       </ul>
-      <span class="navbar-text  fst-italic">
-        &emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;
-        Lets see whats cooking. Shall we?
-      </span>
       <% if user_signed_in? %>
+
+       <span class="navbar-text  fst-italic">
+          &emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp;&emsp; &emsp;
+          Lets see whats cooking. Shall we?
+      </span>
+
         <ul class="navbar-nav text-end me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
             <a class="nav-link fw-light active dropdown-toggle fw-bolder" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <%= current_user.email %>
+              <% if current_user.email.length <18  %>
+                <%= current_user.email %>
+              <% else %>
+                <%= current_user.email[0,18] %> ..
+              <% end %>
             </a>
             <ul class="dropdown-menu bg-dark shadow mb-2 rounded" aria-labelledby="navbarDropdown">
               <%= link_to ' Edit User',edit_user_registration_path, class:"nav-link fw-light"  %>
@@ -39,6 +45,12 @@
           </li>
         </ul>
       <% else %>
+
+       <span class="navbar-text  fst-italic">
+          &emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; &emsp;  &emsp; &emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp;
+          Lets see whats cooking. Shall we?
+      </span>
+
       <ul class="navbar-nav text-end me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
             <a class="nav-link fw-light active dropdown-toggle fw-bolder" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

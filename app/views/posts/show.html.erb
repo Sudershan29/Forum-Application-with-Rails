@@ -1,5 +1,3 @@
-
-
 <div class="card shadow mb-5 rounded border-secondary mb-3">
   <div class="card-header text-center  p-3 fw-bolder">
     <%= @post.title %>
@@ -22,11 +20,8 @@
         <%= (t/60) %> minute ago.
       <% else %>  
         <%= t %> seconds ago.
-
      <% end %>
-
     </small></p>
-
 
     <div class="text-center">
     <%= link_to 'Edit', edit_post_path(@post), class:"btn btn-success" %>

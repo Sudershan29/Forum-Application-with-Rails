@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-
+  before_action :authenticate_user!, except: [:show,:index]
+  before_action :right_user, only:[:edit,:update,:destroy]
   # GET /posts or /posts.json
   def index
     @posts = Post.all
@@ -12,16 +13,20 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @post = current_user.posts.build
   end
 
+  def right_user
+    @post = current_user.posts.find_by(id: params[:id])
+    redirect_to posts_path, notice: "Not authorized." if @post.nil?
+  end
   # GET /posts/1/edit
   def edit
   end
 
   # POST /posts or /posts.json
   def create
-    @post = current_user.posts.new(post_params)
+    @post = current_user.posts.build(post_params)
 
     respond_to do |format|
       if @post.save
