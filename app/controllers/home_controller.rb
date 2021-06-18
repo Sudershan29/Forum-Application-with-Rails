@@ -4,4 +4,9 @@ class HomeController < ApplicationController
 
   def about
   end
+  
+  def whatshot
+  	@posts = Post.order(params[:sort]).reverse_order
+  end
+  
 end

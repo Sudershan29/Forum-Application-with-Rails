@@ -1,0 +1,47 @@
+<h1>Whats hot</h1>
+
+<div class="dropdown text-end">
+  <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Order by
+  </button>
+  <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item"><%= link_to "Latest", :sort => "updated_at"%></a></li>
+    <li><a class="dropdown-item" ><%= link_to "Content", :sort => "content"%></a></li>
+    <li><a class="dropdown-item"><%= link_to "Likes", :sort => "likes"%></a></li>
+    <li><a class="dropdown-item" ><%= link_to "Dislikes", :sort => "dislikes"%></a></li>
+  </ul>
+</div>
+
+<br/>
+<br/>
+<% @posts.each do |post| %>
+  <div class="card shadow mb-5 rounded border-secondary mb-3">
+    <div class="card-header text-center  p-3 fw-bolder">
+      <%= post.title %>
+    </div>
+    <div class="card-body">
+      <p class="card-text fw-light"><%= post.content %></p>
+      <p class="card-text text-end"><small class="text-muted fw-bold fst-italic">Last updated
+       <% t=((Time.now - post.updated_at) ).to_i%> 
+        <% if (t/(60*60*24)) >1 %>
+          <%= (t/(60*60)) %> days ago.
+        <% elsif (t/(60*60*24)) >0 %>
+          <%= (t/(60*60)) %> day ago.
+        <% elsif (t/(60*60)) >1 %>
+          <%= (t/(60*60)) %> hours ago.
+        <% elsif (t/(60*60)) >0 %>
+          <%= (t/(60*60)) %> hour ago.
+        <% elsif t/60 > 1 %>
+          <%= (t/60) %> minutes ago.
+        <% elsif t/60 > 0 %>
+          <%= (t/60) %> minute ago.
+        <% else %>  
+          <%= t %> seconds ago.
+       <% end %>
+      </small></p>
+    </div>
+    <div class="card-footer text-muted text-center">
+      <p class="card-text text-center"><small class="text-muted"> <span class="fw-bold text-success"><%= post.likes%></span>  Likes. <span class="fw-bold text-danger"><%= post.dislikes%></span> Dislikes.</small></p>
+    </div>
+  </div>
+<% end %>

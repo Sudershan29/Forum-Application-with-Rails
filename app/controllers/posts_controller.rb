@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:show,:index]
   before_action :right_user, only:[:edit,:update,:destroy]
   # GET /posts or /posts.json
+
   def index
     @posts = Post.all
   end

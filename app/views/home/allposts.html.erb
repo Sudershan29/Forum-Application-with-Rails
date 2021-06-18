@@ -1,0 +1,17 @@
+<h1>Post List</h1>
+<table>
+  <tr>
+    <th><%= link_to "Title", :sort => "title"%> </th>
+    <th><%= link_to "Content", :sort => "content"%> </th>
+    <th><%= link_to "Likes", :sort => "likes"%> </th>
+    <th><%= link_to "Dislikes", :sort => "dislikes"%> </th>
+  </tr>
+<% @posts.each do |post| %>
+  <tr>
+    <td><%= post.title%></td>
+    <td><%=post.content %></td><td>
+    <td>  <%=post.likes %></td>
+    <td>  <%=post.dislikes %></td>
+  </tr>
+  <% end %>
+  </table>
