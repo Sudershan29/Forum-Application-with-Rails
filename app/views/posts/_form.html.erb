@@ -1,0 +1,44 @@
+<%= form_with(model: post) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="card shadow mb-5 rounded border-secondary mb-3">  
+      <div class="card-header p-3 bg-transparent">
+        <div class="field form-group">
+          <%= form.text_field :title, class:"form-control fw-bolder", placeholder:"Title" %>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="field form-group">
+          <%= form.text_area :content,:cols => "10", :rows => "6", class:"form-control fw-light", placeholder:"Content"   %>
+        </div>
+        <br/>
+        <div class="field form-group">
+          <%= form.number_field :likes, class:"form-control", placeholder:"Upvotes"  %>
+        </div>
+        <br/>
+        <div class="field form-group">
+          <%= form.number_field :dislikes, class:"form-control", placeholder:"Downvotes" %>
+        </div>
+        <br/>
+        <br/>
+        <div class="field form-group">
+          <%= form.number_field :userid, id: :user_post_userid, class:"form-control", value:current_user.id, type: :hidden%>
+        </div>
+        <br/>
+        <div class="actions text-center">
+          <%= form.submit  class:"btn btn-success" %>
+        <br/>
+        </div>
+      </div>
+     </div> 
+<% end %>
