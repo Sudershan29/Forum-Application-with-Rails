@@ -4,6 +4,19 @@ class PostsController < ApplicationController
   before_action :right_user, only:[:edit,:update,:destroy]
   # GET /posts or /posts.json
 
+  def likes
+    @post = Post.all.find(params[:id])
+    Like.create(user_id:current_user.id, post_id:@post.id)
+    @post.likes=@post.likes+1
+  end
+
+  def dislikes
+    @post = Post.all.find(params[:id])
+    Dislike.create(user_id:current_user.id, post_id:@post.id)
+    @post.likes=@post.dislikes+1
+  end
+
+
   def index
     @posts = Post.all
   end
@@ -70,6 +83,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :content, :likes, :dislikes, :updatedat, :userid)
+      params.require(:post).permit(:title, :content, :upvotes, :downvotes, :updatedat, :userid)
     end
 end

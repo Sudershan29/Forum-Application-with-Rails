@@ -5,4 +5,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+ def whatisuseremail(idnumber)
+ 	useremail = User.find_by(id: idnumber).email
+ 	return useremail
+ end
+         
 end

@@ -14,9 +14,9 @@
           <p class="card-text text-end"><small class="text-muted fw-bold fst-italic">Last updated
            <% t=((Time.now - post.updated_at) ).to_i%> 
             <% if (t/(60*60*24)) >1 %>
-              <%= (t/(60*60)) %> days ago.
+              <%= (t/(60*60*24)) %> days ago.
             <% elsif (t/(60*60*24)) >0 %>
-              <%= (t/(60*60)) %> day ago.
+              <%= (t/(60*60*24)) %> day ago.
             <% elsif (t/(60*60)) >1 %>
               <%= (t/(60*60)) %> hours ago.
             <% elsif (t/(60*60)) >0 %>
@@ -38,7 +38,7 @@
         </div>
         <div class="card-footer text-muted text-center border-secondary">
           <span>
-            <p class="card-text text-center"><small class="text-muted"><span class="fw-bold text-success"><%= post.likes%></span>  Likes. <span class="fw-bold text-danger"><%= post.dislikes%></span> Dislikes.</small></p>
+            <p class="card-text text-center"><small class="text-muted"><span class="fw-bold text-success"><%= post.upvotes%></span>  Likes. <span class="fw-bold text-danger"><%= post.downvotes%></span> Dislikes.</small></p>
           </span>
         </div>
       </div>

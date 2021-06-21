@@ -3,15 +3,15 @@
   <tr>
     <th><%= link_to "Title", :sort => "title"%> </th>
     <th><%= link_to "Content", :sort => "content"%> </th>
-    <th><%= link_to "Likes", :sort => "likes"%> </th>
-    <th><%= link_to "Dislikes", :sort => "dislikes"%> </th>
+    <th><%= link_to "Likes", :sort => "upvotes"%> </th>
+    <th><%= link_to "Dislikes", :sort => "downvotes"%> </th>
   </tr>
 <% @posts.each do |post| %>
   <tr>
     <td><%= post.title%></td>
     <td><%=post.content %></td><td>
-    <td>  <%=post.likes %></td>
-    <td>  <%=post.dislikes %></td>
+    <td>  <%=post.upvotes %></td>
+    <td>  <%=post.downvotes %></td>
   </tr>
   <% end %>
   </table>
