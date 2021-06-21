@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_21_064206) do
-
-  create_table "dislikes", force: :cascade do |t|
-    t.integer "user_id_id", null: false
-    t.integer "post_id_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id_id"], name: "index_dislikes_on_post_id_id"
-    t.index ["user_id_id"], name: "index_dislikes_on_user_id_id"
-  end
+ActiveRecord::Schema.define(version: 2021_06_21_120430) do
 
   create_table "likes", force: :cascade do |t|
     t.integer "user_id_id", null: false
@@ -43,6 +34,15 @@ ActiveRecord::Schema.define(version: 2021_06_21_064206) do
     t.index ["userid"], name: "index_posts_on_userid"
   end
 
+  create_table "upvotes", force: :cascade do |t|
+    t.integer "user_id_id", null: false
+    t.integer "post_id_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id_id"], name: "index_upvotes_on_post_id_id"
+    t.index ["user_id_id"], name: "index_upvotes_on_user_id_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(version: 2021_06_21_064206) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "dislikes", "post_ids"
-  add_foreign_key "dislikes", "user_ids"
   add_foreign_key "likes", "post_ids"
   add_foreign_key "likes", "user_ids"
+  add_foreign_key "upvotes", "post_ids"
+  add_foreign_key "upvotes", "user_ids"
 end

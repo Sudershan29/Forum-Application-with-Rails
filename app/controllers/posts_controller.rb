@@ -4,13 +4,13 @@ class PostsController < ApplicationController
   before_action :right_user, only:[:edit,:update,:destroy]
   # GET /posts or /posts.json
 
-  def likes
+  def like
     @post = Post.all.find(params[:id])
-    Like.create(user_id:current_user.id, post_id:@post.id)
+    Like.create(:user_id_id => current_user.id, :post_id_id=>@post.id)
     @post.likes=@post.likes+1
   end
 
-  def dislikes
+  def dislike
     @post = Post.all.find(params[:id])
     Dislike.create(user_id:current_user.id, post_id:@post.id)
     @post.likes=@post.dislikes+1
