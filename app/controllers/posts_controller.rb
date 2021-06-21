@@ -6,14 +6,14 @@ class PostsController < ApplicationController
 
   def like
     @post = Post.all.find(params[:id])
-    Like.create(:user_id_id => current_user.id, :post_id_id=>@post.id)
-    @post.likes=@post.likes+1
+    @post.upvotes=@post.upvotes+1
+    Like.create(user_id_id: current_user.id, post_id_id: @post.id)
   end
 
   def dislike
     @post = Post.all.find(params[:id])
+    @post.downvotes=@post.downvotes+1
     Dislike.create(user_id:current_user.id, post_id:@post.id)
-    @post.likes=@post.dislikes+1
   end
 
 
