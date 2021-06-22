@@ -5,7 +5,7 @@
     Order by
   </button>
   <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" ><%= link_to "Latest", :sort => "updated_at"%></a></li>
+    <li><a class="dropdown-item" ><%= link_to "Latest", :sort => "created_at"%></a></li>
     <li><a class="dropdown-item" ><%= link_to "Content", :sort => "content"%></a></li>
     <li><a class="dropdown-item"><%= link_to "Likes", :sort => "upvotes"%></a></li>
     <li><a class="dropdown-item" ><%= link_to "Dislikes", :sort => "downvotes"%></a></li>
@@ -29,7 +29,7 @@
     <div class="card-body">
       <p class="card-text fw-light"><%= post.content %></p>
       <p class="card-text text-end"><small class="text-muted fw-bold fst-italic">Last updated
-       <% t=((Time.now - post.updated_at) ).to_i%> 
+       <% t=((Time.now - post.created_at) ).to_i%> 
         <% if (t/(60*60*24)) >1 %>
           <%= (t/(60*60*24)) %> days ago.
         <% elsif (t/(60*60*24)) >0 %>

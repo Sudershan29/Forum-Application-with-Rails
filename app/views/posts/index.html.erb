@@ -12,7 +12,7 @@
           <p class="card-text fw-light"><%= post.content %></p>
           <br/>
           <p class="card-text text-end"><small class="text-muted fw-bold fst-italic">Last updated
-           <% t=((Time.now - post.updated_at) ).to_i%> 
+           <% t=((Time.now - post.created_at) ).to_i%> 
             <% if (t/(60*60*24)) >1 %>
               <%= (t/(60*60*24)) %> days ago.
             <% elsif (t/(60*60*24)) >0 %>
