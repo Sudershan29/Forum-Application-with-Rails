@@ -48,16 +48,41 @@
       </small></p>
     </div>
     <div class="card-footer text-muted">
-        <div style="display: inline-block; float: left;width: 470px">
-          <%= button_to "Like", like_path(post), class:"btn btn-sm btn-success", method:"put"%>
-        </div>
-        <div style="display: inline-block; float:none;">
+        <% if user_signed_in? %>
+          <% if post.isliked(current_user)%>
+            <div style="display: inline-block; float: left;width: 470px">
+              <%= button_to "Like", like_path(post), class:"btn btn-sm btn-success", method:"put", disabled: true %>
+            </div>
+          <% else %>
+            <div style="display: inline-block; float: left;width: 470px">
+              <%= button_to "Like", like_path(post), class:"btn btn-sm btn-success", method:"put" %>
+            </div>
+          <% end %>
+        <% else %>
+          <div style="display: inline-block; float: left;width: 470px">
+              <%= button_to "Like", like_path(post), class:"btn btn-sm btn-success", method:"put", disabled: true %>
+          </div>
+        <% end %>
+
+        <div style="display: inline-block; float:none; ">
           <p class="card-text text-center"><small class="text-muted"> <span class="fw-bold text-success"><%= post.upvotes%></span>  Likes. <span class="fw-bold text-danger"><%= post.downvotes%></span> Dislikes.</small></p>
         </div>
 
-        <div style="display: inline-block; float: right;">
-          <%= button_to "Dislike", like_path(post), class:"btn btn-sm btn-danger text-end", method:"put"%>
-        </div>
+        <% if user_signed_in? %>
+          <% if post.isdisliked(current_user) %>
+            <div style="display: inline-block; float: right;">
+              <%= button_to "Dislike", dislike_path(post), class:"btn btn-sm btn-danger", method:"put", disabled: true %>
+            </div>
+          <% else %>
+            <div style="display: inline-block; float: right;">
+              <%= button_to "Dislike", dislike_path(post), class:"btn btn-sm btn-danger", method:"put" %>
+            </div>
+          <% end %>
+        <% else %>
+          <div style="display: inline-block; float: right;">
+              <%= button_to "Dislike", dislike_path(post), class:"btn btn-sm btn-danger text-end", method:"put", disabled: true %>
+          </div>
+        <% end %>
     </div>
   </div>
 <% end %>

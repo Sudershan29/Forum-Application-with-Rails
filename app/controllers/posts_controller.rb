@@ -6,14 +6,39 @@ class PostsController < ApplicationController
 
   def like
     @post = Post.all.find(params[:id])
-    @post.upvotes=@post.upvotes+1
-    Like.create(user_id_id: current_user.id, post_id_id: @post.id)
+    temp = @post.upvotes+1
+    if @post.isdisliked(current_user)
+      temp2 = @post.downvotes - 1
+      @post.update(upvotes: temp, downvotes: temp2)
+      Dislike.find_or_create_by(user_id: current_user.id).destroy
+    else
+      @post.update(upvotes: temp)
+    end
+    Like.create(user_id: current_user.id, post_id: @post.id)
+
+    redirect_back(fallback_location: home_whatshot_path)
+
+    #respond_to do |format|
+      #format.js {render inline: "location.reload();" }
+      #format.html{ redirect_to home_whatshot_path }
+    #end
+    
   end
 
   def dislike
     @post = Post.all.find(params[:id])
-    @post.downvotes=@post.downvotes+1
+    temp=@post.downvotes+1
+    if @post.isliked(current_user)
+      temp2 = @post.upvotes - 1
+      @post.update(upvotes:temp2,downvotes:temp)
+      Like.find_or_create_by(user_id:current_user.id,post_id:@post.id).destroy
+    else
+      @post.update(downvotes: temp)
+    end
+
     Dislike.create(user_id:current_user.id, post_id:@post.id)
+
+    redirect_back(fallback_location: home_whatshot_path)
   end
 
 

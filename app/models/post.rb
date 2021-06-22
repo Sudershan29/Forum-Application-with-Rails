@@ -4,7 +4,7 @@ class Post < ApplicationRecord
 	has_many:dislikes
 
 	def isliked(user)
-		!!self.likes.find{|like|like.user_id==user.id}
+		!!self.likes.find{|like|like.user_id == user.id}
 	end
 
 	def isdisliked(user)
